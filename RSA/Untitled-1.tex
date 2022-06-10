@@ -1,0 +1,85 @@
+\documentclass[dvipdfmx]{beamer}
+\usepackage{amsmath,amsfonts,amssymb,mathtools,ascmac,bm,float,comment,url,fancybox,calc}
+\usepackage[T1]{fontenc}
+\usepackage[dvipdfmx]{color}
+\usepackage{tikz,listings,jlisting}
+\usepackage{pxjahyper}
+\usepackage{xcolor}
+
+    \usetikzlibrary{arrows}
+    \usetikzlibrary{intersections,calc,arrows.meta,backgrounds}
+
+\usetheme{Madrid} 
+%\usecolortheme[RGB={255,240,245}]{structure}
+%\setbeamercolor{palette primary}{fg=black}
+%\setbeamercolor*{palette secondary}{bg=white,fg=black}
+%\setbeamercolor*{palette tertiary}{bg=white,fg=black}
+%\setbeamercolor*{palette quaternary}{bg=white,fg=black}
+\setbeamertemplate{navigation symbols}{}
+\usefonttheme{professionalfonts}
+    \renewcommand{\thefootnote}{\arabic{footnote})}
+
+
+\title[RSA Cipher System]{Basics of the RSA Cipher System}
+\author[K.MIZOGUCHI]{MIZOGUCHI Koki\thanks{Information Security System Laboratory}}
+\date{\today}
+\institute[KUT]{Kochi University of Technology}
+\titlegraphic{\includegraphics[scale=0.3]{KUTLogo.jpg}}
+
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Table of Contents}
+\tableofcontents
+\end{frame}
+
+\section*{What's the RSA}
+\begin{frame}{What's the RSA}
+    Prime factorization of large number is difficult.This is because there is no other way to find prime factors except by round-robin.\\
+    Therefore, even if one tries to factorize a large number using a computer, it will take an enormous amount of time.\\
+    The RSA cipher users this mechanism.
+    \begin{block}{}
+        This is named after the three inventors, R.L.Rivest, A.Shamir, and L.Adleman.
+    \end{block}
+\end{frame}
+\section*{A type of algorithm for public key cryptography}
+\begin{frame}{A type of algorithm for public key cryptography}
+    RSA cipher is a type of algorithm for public key cryptography.\\
+    Public key cryptography is an encryption scheme in which the encroption key and decryption key are separete.\\
+    With RSA, the plaintext,key,and ciphertext are number.\\
+    \textbf{Denote the ciphertext as $C$, plaintext as $P$}.
+\end{frame}
+\section*{Encryption and decryption}
+\begin{frame}{Encryption and decryption}
+    \begin{alertblock}{Encryption by RSA}
+        \begin{align}
+            C=P^E\bmod N
+        \end{align}
+        \(\{E,N\}\) is the public key.
+    \end{alertblock}
+    \begin{alertblock}{RSA decryption}
+        \begin{align}
+            P=C^D\bmod N
+        \end{align}
+        \(\{D,N\}\) is the private key.
+    \end{alertblock}
+\end{frame}
+\section*{Make keys}
+\begin{frame}{Make keys}
+    How to prepare the \(E,D,N\)?
+    \begin{enumerate}
+        \item \(N\) is obtained.
+        \item \(L\) is obtained. (\(L\) appears only when making the keys.)
+        \item \(E\) is obtained.
+        \item \(D\) is obtained.
+    \end{enumerate}
+\end{frame}
+\subsection*{\(N\) is obtained}
+\begin{frame}{\(N\) is obtained}
+    
+\end{frame}
+\end{document}
