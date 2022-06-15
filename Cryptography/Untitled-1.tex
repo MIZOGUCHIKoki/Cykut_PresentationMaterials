@@ -1,0 +1,114 @@
+\documentclass[dvipdfmx]{beamer}
+\usepackage{amsmath,amsfonts,amssymb,mathtools,ascmac,bm,float,comment,url,fancybox,calc}
+\usepackage[T1]{fontenc}
+\usepackage[dvipdfmx]{color}
+\usepackage{tikz,listings,jlisting}
+\usepackage{pxjahyper}
+\usepackage{xcolor}
+    \usetikzlibrary{arrows}
+    \usetikzlibrary{intersections,calc,arrows.meta,backgrounds,shapes.geometric,shapes.misc,positioning,fit,graphs}
+
+\usetheme{Madrid} 
+%\usecolortheme[RGB={255,240,245}]{structure}
+%\setbeamercolor{palette primary}{fg=black}
+%\setbeamercolor*{palette secondary}{bg=white,fg=black}
+%\setbeamercolor*{palette tertiary}{bg=white,fg=black}
+%\setbeamercolor*{palette quaternary}{bg=white,fg=black}
+\setbeamertemplate{navigation symbols}{}
+\usefonttheme{professionalfonts}
+    \renewcommand{\thefootnote}{\arabic{footnote})}
+    \renewcommand{\figurename}{Fig\thesection-\thefigure}
+    \renewcommand{\tablename}{Tbl\thesection-\thatable}
+    \newcommand{\tabref}[1]{Tbl\thesection-\ref{#1}}
+    \newcommand{\figref}[1]{Fig\thesection-\ref{#1}}
+\makeatletter
+    \@addtoreset{figure}{section}
+    \@addtoreset{table}{section}
+\makeatother
+\title[暗号技術入門]{暗号技術入門}
+\author[K.MIZOGUCHI]{溝口洸熙}
+\date{\today}
+\institute[KUT]{高知工科大学 情報学群}
+\titlegraphic{\includegraphics[scale=0.3]{KUTLogo.jpg}}
+
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+\begin{frame}{目次}
+    \tableofcontents
+\end{frame}
+
+\section{共通鍵暗号方式}
+\subsection{DES(Data Encryption Standard)}
+\begin{frame}{DES(Data Encryption Standard)}
+    \begin{block}{DES概要}
+        DES暗号は，64bitの平文を64bitの暗号文に暗号化する\textbf{対称暗号}．\\
+        鍵のビット長は，56bit.\footnote{64bitだが，エラー検出の情報が7Bitおおきに1Bitはいるので，実質的には56Bit．}
+    \end{block}
+    \begin{figure}[b]
+        \centering
+        \caption{暗号化の概要}
+        \label{fig:暗号化の概要}
+        \begin{tikzpicture}
+            \tikzset{data/.style={draw,rounded corners,rectangle,text centered, minimum height = 1cm,text width=2cm}};
+            \tikzset{Key/.style={fill=red!10,rounded corners,rectangle,text centered, minimum height = 1cm,text width=2cm}};
+            \tikzset{Encryption/.style={draw,very thick,rectangle,text centered,minimum height=1cm,text width=2cm}};
+
+            \node[data](Plain){平文\\64Bit};
+            \node[Encryption,right=0.5cm of Plain](Encryption){DESによる暗号化};
+            \node[Key,below=0.5cm of Encryption](Key){鍵\\54Bit};
+            \node[data,right=0.5cm of Encryption](Cipher){暗号文\\64bit};
+            
+            \draw[-latex,thick](Plain)--(Encryption);
+            \draw[-latex,thick](Encryption)--(Cipher);
+            \draw[-latex,very thick](Key)--(Encryption);
+        \end{tikzpicture}
+        
+    \end{figure}
+\end{frame}
+\begin{frame}{DESの構造}
+    \begin{block}{DESの構造}
+        DESの基本構造は，ファイステルネットワーク．
+    \end{block}
+    \begin{block}{ファイステルネットワーク}
+        \textbf{ラウンド}と呼ばれる暗号化の1ステップを何度も繰り返すようになっている．これは，多くのブロック暗号\footnote{ビット列をまとめて暗号化する暗号アルゴリズム} で採用されている．\\
+        ファイステルネットワークの1ラウンドを\figref{fig:ファイステルネットワークの1ラウンド}に示す．
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \begin{figure}[t]
+        \centering
+        \caption{ファイステルネットワークの1ラウンド}
+        \label{fig:ファイステルネットワークの1ラウンド}
+        \begin{tikzpicture}
+            \tikzset{data/.style={draw,rounded corners,rectangle,text centered, minimum height = 1cm,text width=2cm}};
+            \tikzset{Key/.style={draw,rounded corners,rectangle,text centered, minimum height = 1cm,text width=2cm}};
+            \tikzset{Encryption/.style={draw,very thick,rectangle,text centered,minimum height=1cm,text width=2cm}};
+            \tikzset{XOR/.style={draw,thick,circle,text centered}};
+            
+            \node[data](left){\(a\)};
+            \node[data,right=of left](right){\(b\)};
+            \node[XOR,below=of left](XOR){XOR};
+            \node[data,fill=gray!20,below=of XOR](left2){\(a'\)};
+            
+            \node[data,right=of left2](right2){\(b\)};
+            \draw[-latex,thick](left)--(XOR);
+            \draw[-latex,thick](XOR)--(left2);
+            \draw[-latex,thick](right)--(right2);
+            
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+
+
+\subsection{AES(Advanced Encryption Standard)}
+\begin{frame}{AES(Advanced Encryption Standard)}
+    
+\end{frame}
+
+
+\end{document}
