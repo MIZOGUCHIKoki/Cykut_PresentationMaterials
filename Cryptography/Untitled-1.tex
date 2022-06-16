@@ -12,7 +12,8 @@
                 data/.style={draw,rounded corners,rectangle,text centered, minimum height = 1cm,text width=2cm},
                 Key/.style={fill=red!10,rounded corners,rectangle,text centered, minimum height = 1cm,text width=2cm},
                 Encryption/.style={draw,fill=blue!10,very thick,rectangle,text centered,minimum height=1cm,text width=4cm},
-                XOR/.style={draw,circle,text centered}
+                XOR/.style={draw,circle,text centered},
+                empty/.style={rectangle,rounded corners, minimum height=1cm,text width=2cm}
             }
 
 \usetheme{Madrid} 
@@ -63,7 +64,7 @@
             \node[Encryption,right=0.5cm of Plain](Encryption){DESによる暗号化};
             \node[Key,below=0.5cm of Encryption](Key){鍵\\54Bit};
             \node[data,right=0.5cm of Encryption](Cipher){暗号文\\64bit};
-            
+             
             \draw[-latex,thick](Plain)--(Encryption);
             \draw[-latex,thick](Encryption)--(Cipher);
             \draw[-latex,very thick](Key)--(Encryption);
@@ -87,6 +88,11 @@
         \caption{ファイステルネットワークの1ラウンド}
         \label{fig:ファイステルネットワークの1ラウンド}
         \begin{tikzpicture}
+            \node[empty](center){};
+            \node[data,left=1.5cm of center](a){\(a\)};
+            \node[data,right=1.5cm of center](b){\(b\)};
+            \node[Key,below=0.5cm of center](Key){Sub Key};
+            \node[Encryption,below=0.5cm of Key](Encryption){ラウンド関数\(f\)};
 
         \end{tikzpicture}
     \end{figure}
