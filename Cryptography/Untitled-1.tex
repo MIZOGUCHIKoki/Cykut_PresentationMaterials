@@ -12,7 +12,6 @@
                 data/.style={draw,rounded corners,rectangle,text centered, minimum height = 1cm,text width=2cm},
                 Key/.style={fill=red!10,rounded corners,rectangle,text centered, minimum height = 1cm,text width=2cm},
                 Encryption/.style={draw,fill=blue!10,very thick,rectangle,text centered,minimum height=1cm,text width=4cm},
-                XOR/.style={draw,circle,text centered},
                 empty/.style={rectangle,rounded corners, minimum height=1cm,text width=2cm}
             }
 
@@ -34,7 +33,7 @@
     \@addtoreset{table}{section}
 \makeatother
 \title[暗号技術入門]{暗号技術入門}
-\author[K.MIZOGUCHI]{溝口洸熙}
+\author[K.MIZOGUCHI]{溝口洸熙\thanks{情報セキュリティシステム研究室}}
 \date{\today}
 \institute[KUT]{高知工科大学 情報学群}
 \titlegraphic{\includegraphics[scale=0.3]{KUTLogo.jpg}}
@@ -89,11 +88,20 @@
         \label{fig:ファイステルネットワークの1ラウンド}
         \begin{tikzpicture}
             \node[empty](center){};
-            \node[data,left=1.5cm of center](a){\(a\)};
-            \node[data,right=1.5cm of center](b){\(b\)};
             \node[Key,below=0.5cm of center](Key){Sub Key};
             \node[Encryption,below=0.5cm of Key](Encryption){ラウンド関数\(f\)};
-
+            \node[left=1cm of Encryption,scale=3](XOR){\(\oplus\)};
+            \node[color=white,right=1cm of Encryption,scale=3](XOR2){$\oplus$};
+            \node[data,above=1.5cm of XOR](a){\(a\)};
+            \node[data,above=1.5cm of XOR2](b){\(b\)};
+            \node[data,below=1.5cm of XOR2](b2){\(b\)};
+            \node[data,below=1.5cm of XOR](a2){\(a'\)};
+            \draw[-latex,very thick](a)--(XOR);
+            \draw[-latex,very thick](XOR)--(a2);
+            \draw[-latex,very thick](Key)--(Encryption);
+            \draw[-latex,very thick](b)--(b2);
+            \draw[-latex,very thick](b)|-(Encryption);
+            \draw[-latex,very thick](Encryption)--(XOR);
         \end{tikzpicture}
     \end{figure}
 \end{frame}
