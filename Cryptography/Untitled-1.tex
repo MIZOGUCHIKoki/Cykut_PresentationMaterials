@@ -12,7 +12,6 @@
                 data/.style={draw,rounded corners,rectangle,text centered, minimum height = 1cm,text width=2cm},
                 Key/.style={fill=red!10,rounded corners,rectangle,text centered, minimum height = 1cm,text width=2cm},
                 Encryption/.style={draw,fill=blue!10,very thick,rectangle,text centered,minimum height=1cm,text width=4cm},
-                XOR/.style={draw,circle,text centered},
                 empty/.style={rectangle,rounded corners, minimum height=1cm,text width=2cm}
             }
 
@@ -34,7 +33,7 @@
     \@addtoreset{table}{section}
 \makeatother
 \title[暗号技術入門]{暗号技術入門}
-\author[K.MIZOGUCHI]{溝口洸熙}
+\author[K.MIZOGUCHI]{溝口洸熙\thanks{情報セキュリティシステム研究室}}
 \date{\today}
 \institute[KUT]{高知工科大学 情報学群}
 \titlegraphic{\includegraphics[scale=0.3]{KUTLogo.jpg}}
@@ -112,7 +111,6 @@
 \subsubsection{Rijndealの暗号化}
 \begin{frame}{Rijndaelの暗号化}
 Rijndaelの暗号化は，4ステップに分かれている．
-% \begin{enumerate}
 \begin{table}[h]
     \centering
     \begin{tabular}{llc}
