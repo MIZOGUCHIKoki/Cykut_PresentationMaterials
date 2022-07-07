@@ -50,10 +50,14 @@
 
 \section{共通鍵暗号方式}
 \subsection{DES(Data Encryption Standard)}
+\begin{frame}
+\frametitle{目次}
+\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded]
+\end{frame}
 \begin{frame}{DES(Data Encryption Standard)}
     \begin{block}{DES概要}
         DES暗号は，64bitの平文を64bitの暗号文に暗号化する\textbf{対称暗号}．\\
-        鍵のビット長は，56bit.\footnote{64bitだが，エラー検出の情報が7Bitおおきに1Bitはいるので，実質的には56Bit．}
+        鍵のビット長は，56bit.\footnote{64bitだが，エラー検出の情報が7Bitおきに1Bitはいるので，実質的には56Bit．}
     \end{block}
     \begin{figure}[b]
         \centering
@@ -72,38 +76,56 @@
         
     \end{figure}
 \end{frame}
+\subsubsection{DESの構造}
 \begin{frame}{DESの構造}
     \begin{block}{DESの構造}
         DESの基本構造は，ファイステルネットワーク．
     \end{block}
     \begin{block}{ファイステルネットワーク}
         \textbf{ラウンド}と呼ばれる暗号化の1ステップを何度も繰り返すようになっている．これは，多くのブロック暗号\footnote{ビット列をまとめて暗号化する暗号アルゴリズム} で採用されている．\\
-        ファイステルネットワークの1ラウンドを\figref{fig:ファイステルネットワークの1ラウンド}に示す．
     \end{block}
 \end{frame}
-
-\begin{frame}
-    \begin{figure}[t]
-        \centering
-        \caption{ファイステルネットワークの1ラウンド}
-        \label{fig:ファイステルネットワークの1ラウンド}
-        \begin{tikzpicture}
-            \node[empty](center){};
-            \node[data,left=1.5cm of center](a){\(a\)};
-            \node[data,right=1.5cm of center](b){\(b\)};
-            \node[Key,below=0.5cm of center](Key){Sub Key};
-            \node[Encryption,below=0.5cm of Key](Encryption){ラウンド関数\(f\)};
-
-        \end{tikzpicture}
-    \end{figure}
+\subsubsection{DESの脆弱性}
+\begin{frame}{DESの脆弱性}
+    \begin{alertblock}{DESの脆弱性}
+        DESは，ブルート・フォース・アタック\footnote{可能な組み合わせを全て試す解読方法．}で現実的な時間内に解読されてしまう．\\
+    \end{alertblock}
 \end{frame}
-
-
-
 \subsection{AES(Advanced Encryption Standard)}
-\begin{frame}{AES(Advanced Encryption Standard)}
-    
+\begin{frame}
+\frametitle{目次}
+\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded]
 \end{frame}
-
-
+\begin{frame}{AES(Advanced Encryption Standard)}
+    \begin{block}{AESとは何か？}
+        AES（Advanced Encryption Standard）は，これまで標準にあったDESに代わって，新しい基準となる対象暗号アルゴリズム．\\
+        企業や暗号学者からAESの候補として数多の対象暗号アルゴリズムがあり，その中で\textbf{Rijndael}という対象暗号アルゴリズムが2000年にAESとして選定された．
+    \end{block}
+\end{frame}
+\subsubsection{Rijndael}
+\begin{frame}{Rijndael}
+    \begin{block}{Rijndael}
+        Rijndaelは，DESと同じく複数のラウンドから構成されている．DESではファイステルネットワークという基本構造が使われていたが，Rijndaelでは\textbf{SPN構造}という構造が使われている．\\
+        また，Rijndaelの入力ブロックは128ビット（16バイト）．
+    \end{block}
+\end{frame}
+\subsubsection{Rijndealの暗号化}
+\begin{frame}{Rijndaelの暗号化}
+Rijndaelの暗号化は，4ステップに分かれている．
+% \begin{enumerate}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{llc}
+        \hline
+        \multicolumn{1}{c}{処理} & \multicolumn{1}{c}{意味} & 記号\footnotemark[1]\\
+        \hline
+        SubBytes    & バイトごとの置換   & \tikz{\node[fill=red!10,rectangle,rounded corners,text centered,text width=1cm,minimum height=0.5cm]{\(SB\)}} \\
+        ShiftRows   & 行シフト       & \tikz{\node[fill=blue!10,rectangle,rounded corners,text centered,text width=1cm,minimum height=0.5cm]{\(SR\)}}  \\    
+        MixColumns  & 列の混合       &  \tikz{\node[fill=green!10,rectangle,rounded corners,text centered,text width=1cm,minimum height=0.5cm]{\(MC\)}} \\
+        AddRoundKey & ラウンド鍵とのXOR & \tikz{\node[fill=gray!10,rectangle,rounded corners,text centered,text width=1cm,minimum height=0.5cm]{\(AR\)}}   \\
+        \hline
+    \end{tabular}
+    \footnotetext[1]{このスライドで適当に定義した．}
+\end{table}
+\end{frame}
 \end{document}
