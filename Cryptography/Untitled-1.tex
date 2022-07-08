@@ -115,15 +115,55 @@ Rijndaelの暗号化は，4ステップに分かれている．
     \centering
     \begin{tabular}{llc}
         \hline
-        \multicolumn{1}{c}{処理} & \multicolumn{1}{c}{意味} & 記号\footnotemark[1]\\
+        \multicolumn{1}{c}{処理} & \multicolumn{1}{c}{意味} \\
         \hline
-        SubBytes    & バイトごとの置換   & \tikz{\node[fill=red!10,rectangle,rounded corners,text centered,text width=1cm,minimum height=0.5cm]{\(SB\)}} \\
-        ShiftRows   & 行シフト       & \tikz{\node[fill=blue!10,rectangle,rounded corners,text centered,text width=1cm,minimum height=0.5cm]{\(SR\)}}  \\    
-        MixColumns  & 列の混合       &  \tikz{\node[fill=green!10,rectangle,rounded corners,text centered,text width=1cm,minimum height=0.5cm]{\(MC\)}} \\
-        AddRoundKey & ラウンド鍵とのXOR & \tikz{\node[fill=gray!10,rectangle,rounded corners,text centered,text width=1cm,minimum height=0.5cm]{\(AR\)}}   \\
+        SubBytes    & バイトごとの置換 \\
+        ShiftRows   & 行シフト       \\
+        MixColumns  & 列の混合       \\
+        AddRoundKey & ラウンド鍵とのXOR \\
         \hline
     \end{tabular}
     \footnotetext[1]{このスライドで適当に定義した．}
 \end{table}
+\end{frame}
+\begin{frame}
+    \begin{figure}[h]
+        \centering
+        \caption{Rijndaelの暗号化}
+        \label{fig:RijndaelCryptography}
+        \begin{tikzpicture}
+            % \tikzset{SR/.style={draw,fill=gray!10,rounded corners,text centered}};
+            \node[draw,rectangle,text width=10cm,text centered](input){平文入力128ビット};
+            \node[below=0.5cm of input,fill=red!10,rectangle,rounded corners,text centered,text width=10cm,minimum height=0.8cm](SB){SubBytes};
+            \node[below=0.5cm of SB,fill=blue!10,rectangle,rounded corners,text centered,text width=10cm,minimum height=0.8cm](SR){ShiftRows};
+            \node[below=0.5cm of SR,fill=green!10,rectangle,rounded corners,text centered,text width=10cm,minimum height=0.8cm](MC){MixColumns};
+            \node[below=0.5cm of MC,fill=gray!10,rectangle,rounded corners,text centered,text width=10cm,minimum height=0.8cm](AR){AddRoundKey};
+            \node[below=0.5cm of AR,draw,rectangle,text width=10cm,text centered](output){暗号文出力128ビット};
+            \draw[-latex,very thick](input)--(SB);
+            \draw[-latex,very thick](SB)--(SR);
+            \draw[-latex,very thick](SR)--(MC);
+            \draw[-latex,very thick](MC)--(AR);
+            \draw[-latex,very thick](AR)--(output);
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+\subsubsection{Rijndaelの復号}
+\begin{frame}{Rijndaelの復号}
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}
+            \node[draw,rectangle,text width=10cm,text centered](input){平文出力128ビット};
+            \node[below=0.5cm of input,fill=red!10,rectangle,rounded corners,text centered,text width=10cm,minimum height=0.8cm](SB){SubBytes};
+            \node[below=0.5cm of SB,fill=blue!10,rectangle,rounded corners,text centered,text width=10cm,minimum height=0.8cm](SR){ShiftRows};
+            \node[below=0.5cm of SR,fill=green!10,rectangle,rounded corners,text centered,text width=10cm,minimum height=0.8cm](MC){MixColumns};
+            \node[below=0.5cm of MC,fill=gray!10,rectangle,rounded corners,text centered,text width=10cm,minimum height=0.8cm](AR){AddRoundKey};
+            \node[below=0.5cm of AR,draw,rectangle,text width=10cm,text centered](output){暗号文入力128ビット};
+            \draw[-latex,very thick](SB)--(input);
+            \draw[-latex,very thick](SR)--(SB);
+            \draw[-latex,very thick](MC)--(SR);
+            \draw[-latex,very thick](AR)--(MC);
+            \draw[-latex,very thick](output)--(AR);
+        \end{tikzpicture}
+    \end{figure}
 \end{frame}
 \end{document}
